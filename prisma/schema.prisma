@@ -1,0 +1,69 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  STUDENT
+  TUTOR
+  ADMIN
+}
+
+model TutorProfile {
+  id         String   @id @default(uuid())
+  userId     String   @unique
+  bio        String
+  hourlyRate Int
+  subjects   String[]
+  rating     Float    @default(0)
+
+  createdAt DateTime @default(now())
+
+  user     String //better auth
+  bookings Booking[]
+  reviews  Review[]
+}
+
+model Booking {
+  id        String   @id @default(uuid())
+  userId    String
+  tutorId   String
+  date      DateTime
+  startTime String
+  endTime   String
+  status    String   @default("CONFIRMED")
+
+  createdAt DateTime @default(now())
+
+  user  String //better auth
+  tutor TutorProfile @relation(fields: [tutorId], references: [id])
+}
+
+model Review {
+  id      String @id @default(uuid())
+  rating  Int
+  comment String
+
+  userId  String
+  tutorId String
+
+  createdAt DateTime @default(now())
+
+  user  String //better auth
+  tutor TutorProfile @relation(fields: [tutorId], references: [id])
+}
+
+model Category {
+  id   String @id @default(uuid())
+  name String @unique
+}
