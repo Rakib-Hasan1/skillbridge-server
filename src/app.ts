@@ -2,13 +2,16 @@ import express from "express";
 import { profileRouter } from "./modules/tutorProfile/profile.router";
 import { toNodeHandler } from "better-auth/node";
 import { auth } from "./lib/auth";
-import cors from "cors"
+import cors from "cors";
+import { categoryRouter } from "./modules/category/category.router";
 
 const app = express();
+app.use(express.json());
 
 app.use(
   cors({
     origin: process.env.APP_URL || "http://localhost:3000",
+    credentials: true,
   }),
 );
 
@@ -19,5 +22,6 @@ app.get("/", (req, res) => {
 });
 
 app.use("/profile", profileRouter);
+app.use("/category", categoryRouter);
 
 export default app;
