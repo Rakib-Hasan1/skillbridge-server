@@ -19,6 +19,8 @@ const createCategory = async (req: Request, res: Response) => {
 
 const getCategory = async (req: Request, res: Response) => {
   try {
+        const user = req.user;
+    console.log(user);
     const result = await categoryService.getCategory();
     res.status(200).json({
       success: true,
