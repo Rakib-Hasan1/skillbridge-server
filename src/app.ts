@@ -4,7 +4,6 @@ import { toNodeHandler } from "better-auth/node";
 import { auth } from "./lib/auth";
 import cors from "cors";
 import { categoryRouter } from "./modules/category/category.router";
-import { tutorAvailabilityController } from "./modules/tutorSessionSlot/available.controller";
 import { bookingRouter } from "./modules/booking/booking.router";
 import { availableRouter } from "./modules/tutorSessionSlot/available.router";
 
