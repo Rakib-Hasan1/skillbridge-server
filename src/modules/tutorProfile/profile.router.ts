@@ -4,7 +4,7 @@ import auth, { UserRole } from "../../middlewares/auth";
 
 const router = express.Router();
 
-router.post("/", auth(UserRole.TUTOR), TutorProfileController.createProfile);
+router.post("/", auth(UserRole.STUDENT), TutorProfileController.createProfile);
 router.get("/", TutorProfileController.getProfile);
 router.get("/:tutorId", TutorProfileController.getSingleProfile);
 

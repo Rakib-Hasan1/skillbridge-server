@@ -11,6 +11,7 @@ const createProfile = async (
   payload: CreateTutorProfilePayload,
   userId: string,
 ) => {
+  
   const { bio, hourlyRate, subjects } = payload;
 
   const data = {
@@ -33,6 +34,11 @@ const createProfile = async (
       ...data,
       userId,
     },
+  });
+
+  await prisma.user.update({
+    where: { id: userId },
+    data: { role: "TUTOR" },
   });
   return result;
 };
