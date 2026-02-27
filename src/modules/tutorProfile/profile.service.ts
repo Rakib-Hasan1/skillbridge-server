@@ -11,16 +11,12 @@ const createProfile = async (
   payload: CreateTutorProfilePayload,
   userId: string,
 ) => {
-  
-  const { bio, hourlyRate, subjects } = payload;
+  const { bio, hourlyRate, categoryIds } = payload;
 
-  const data = {
-    userId,
-    bio,
-    hourlyRate,
-    subjects,
-    rating: 0,
-  } as const;
+  // ✅ Validate required fields
+  if (!bio || !hourlyRate || !categoryIds || categoryIds.length === 0) {
+    throw new Error("All fields including categories are required");
+  }
 
   const existing = await prisma.tutorProfile.findUnique({
     where: { userId },
@@ -29,10 +25,19 @@ const createProfile = async (
   if (existing) {
     throw new Error("Tutor profile already exists");
   }
+
   const result = await prisma.tutorProfile.create({
     data: {
-      ...data,
       userId,
+      bio,
+      hourlyRate: Number(hourlyRate),
+      rating: 0,
+      categories: {
+        connect: categoryIds.map((id) => ({ id })),
+      },
+    },
+    include: {
+      categories: true,
     },
   });
 
@@ -40,6 +45,7 @@ const createProfile = async (
     where: { id: userId },
     data: { role: "TUTOR" },
   });
+
   return result;
 };
 

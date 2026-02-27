@@ -19,9 +19,23 @@ const createCategory = async (req: Request, res: Response) => {
 
 const getCategory = async (req: Request, res: Response) => {
   try {
-        const user = req.user;
-    console.log(user);
+    const user = req.user;
     const result = await categoryService.getCategory();
+    res.status(200).json({
+      success: true,
+      data: result,
+    });
+  } catch (error) {
+    res.status(404).json({
+      error: "Category fetch failed!!",
+      message: error instanceof Error ? error.message : "Unknown error",
+    });
+  }
+};
+const deleteCategory = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id;
+    const result = await categoryService.deleteCategory(id as string);
     res.status(200).json({
       success: true,
       data: result,
@@ -37,4 +51,5 @@ const getCategory = async (req: Request, res: Response) => {
 export const categoryController = {
   createCategory,
   getCategory,
+  deleteCategory,
 };

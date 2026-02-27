@@ -8,7 +8,7 @@ const createProfile = async (req: Request, res: Response) => {
         error: "Unauthorized!",
       });
     }
-    console.log("BODY:", req.body);
+
     const result = await TutorProfileService.createProfile(
       req.body,
       req.user.id,

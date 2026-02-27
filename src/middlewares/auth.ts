@@ -25,7 +25,6 @@ declare global {
 const auth = (...roles: UserRole[]) => {
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
-      console.log("🔥 AUTH MIDDLEWARE HIT");
 
       // get user session
       const session = await betterAuth.api.getSession({
@@ -37,8 +36,6 @@ const auth = (...roles: UserRole[]) => {
           message: "Your are not authorized",
         });
       }
-
-      // console.log(session);
       
 
       req.user = {
@@ -49,7 +46,7 @@ const auth = (...roles: UserRole[]) => {
         emailVerified: session.user.emailVerified,
         image: session.user.image as string,
       };
-      console.log("from middleware user :", req.user);
+
       if (roles.length && !roles.includes(req.user.role as UserRole)) {
         return res.status(403).json({
           success: false,
