@@ -43,8 +43,8 @@ model TutorAvailability {
   tutor   TutorProfile @relation(fields: [tutorId], references: [id])
 
   day       String // "Monday"
-  startTime DateTime
-  endTime   DateTime
+  startTime String
+  endTime   String
 
   isBooked Boolean @default(false)
 
