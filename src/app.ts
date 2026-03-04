@@ -6,6 +6,7 @@ import cors from "cors";
 import { categoryRouter } from "./modules/category/category.router";
 import { availabilityRouter } from "./modules/tutorSessionSlot/available.router";
 import { bookingRouter } from "./modules/booking/booking.router";
+import { reviewsRouter } from "./modules/reviews/review.router";
 
 const app = express();
 app.use(express.json());
@@ -27,5 +28,6 @@ app.use("/profile", profileRouter);
 app.use("/category", categoryRouter);
 app.use("/bookings", bookingRouter);
 app.use("/availability", availabilityRouter);
+app.use("/reviews", reviewsRouter);
 
 export default app;

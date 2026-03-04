@@ -56,7 +56,8 @@ const getProfile = async () => {
       categories: true, // all categories
       reviews: {
         include: {
-          user: true, // if Review has a relation to User
+          tutorProfile: true, // if Review has a relation to User
+          student: true,
         },
       },
       tutorAvailabilities: true,
@@ -78,7 +79,8 @@ const getSingleProfile = async (tutorId: string) => {
       categories: true, // all categories
       reviews: {
         include: {
-          user: true, // if Review has a relation to User
+          tutorProfile: true, // if Review has a relation to User
+          student: true,
         },
       },
       tutorAvailabilities: true,
