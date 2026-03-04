@@ -16,4 +16,6 @@ router.get(
   tutorAvailabilityController.getMyAvailability,
 );
 
+router.get("/:tutorId", tutorAvailabilityController.getTutorAvailability);
+
 export const availabilityRouter = router;

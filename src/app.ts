@@ -5,6 +5,7 @@ import { auth } from "./lib/auth";
 import cors from "cors";
 import { categoryRouter } from "./modules/category/category.router";
 import { availabilityRouter } from "./modules/tutorSessionSlot/available.router";
+import { bookingRouter } from "./modules/booking/booking.router";
 
 const app = express();
 app.use(express.json());
@@ -24,7 +25,7 @@ app.get("/", (req, res) => {
 
 app.use("/profile", profileRouter);
 app.use("/category", categoryRouter);
-// app.use("/booking", bookingRouter);
+app.use("/bookings", bookingRouter);
 app.use("/availability", availabilityRouter);
 
 export default app;

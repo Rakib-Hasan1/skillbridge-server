@@ -48,23 +48,25 @@ model TutorAvailability {
 
   isBooked Boolean @default(false)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  bookings  Booking[]
 }
 
 model Booking {
-  id        String   @id @default(uuid())
-  userId    String
-  tutorId   String
-  date      DateTime
-  startTime String
-  endTime   String
-  status    String   @default("CONFIRMED")
+  id String @id @default(uuid())
 
-  createdAt DateTime @default(now())
+  slotId String            @unique
+  slot   TutorAvailability @relation(fields: [slotId], references: [id])
 
-  user  User         @relation(fields: [userId], references: [id])
-  tutor TutorProfile @relation(fields: [tutorId], references: [id])
+  studentId String
+  student   User   @relation(fields: [studentId], references: [id])
+
+  status String @default("CONFIRMED") // later: CANCELLED
+
+  createdAt      DateTime      @default(now())
+  tutorProfile   TutorProfile @relation(fields: [tutorProfileId], references: [id])
+  tutorProfileId String
 }
 
 model Review {

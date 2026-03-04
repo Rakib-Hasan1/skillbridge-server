@@ -63,7 +63,7 @@ const getProfile = async () => {
       bookings: {
         where: { status: "confirmed" }, // optional, only upcoming or confirmed bookings
         include: {
-          user: true,
+          student: true, // must match relation name in Booking model
         },
       },
     },
@@ -85,7 +85,7 @@ const getSingleProfile = async (tutorId: string) => {
       bookings: {
         where: { status: "confirmed" }, // optional, only upcoming or confirmed bookings
         include: {
-          user: true,
+          student: true, // must match relation name in Booking model
         },
       },
     },
