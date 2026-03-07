@@ -1,6 +1,6 @@
 // controllers/review.controller.ts
 import { Request, Response } from "express";
-import { createReviewService } from "./review.service";
+import { createReviewService, getTutorReviewsService } from "./review.service";
 
 export const createReviewController = async (req: Request, res: Response) => {
   try {
@@ -23,5 +23,22 @@ export const createReviewController = async (req: Request, res: Response) => {
     res.json({ success: true, data: review });
   } catch (error: any) {
     res.status(400).json({ success: false, message: error.message });
+  }
+};
+
+export const getTutorReviewsController = async (req: Request, res: Response) => {
+  try {
+    const tutorId = req.user?.id;
+
+    const reviews = await getTutorReviewsService(tutorId as string);
+
+    res.json({
+      success: true,
+      data: reviews,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      message: error.message,
+    });
   }
 };

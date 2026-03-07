@@ -52,19 +52,19 @@ const createProfile = async (
 const getProfile = async () => {
   const result = await prisma.tutorProfile.findMany({
     include: {
-      user: true, // includes all user info
-      categories: true, // all categories
+      user: true,
+      categories: true,
       reviews: {
         include: {
-          tutorProfile: true, // if Review has a relation to User
+          tutorProfile: true,
           student: true,
         },
       },
       tutorAvailabilities: true,
       bookings: {
-        where: { status: "confirmed" }, // optional, only upcoming or confirmed bookings
+        where: { status: "confirmed" },
         include: {
-          student: true, // must match relation name in Booking model
+          student: true,
         },
       },
     },
@@ -75,19 +75,19 @@ const getSingleProfile = async (tutorId: string) => {
   const result = await prisma.tutorProfile.findUnique({
     where: { id: tutorId },
     include: {
-      user: true, // includes all user info
-      categories: true, // all categories
+      user: true,
+      categories: true,
       reviews: {
         include: {
-          tutorProfile: true, // if Review has a relation to User
+          tutorProfile: true,
           student: true,
         },
       },
       tutorAvailabilities: true,
       bookings: {
-        where: { status: "confirmed" }, // optional, only upcoming or confirmed bookings
+        where: { status: "confirmed" },
         include: {
-          student: true, // must match relation name in Booking model
+          student: true,
         },
       },
     },

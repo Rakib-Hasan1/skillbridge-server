@@ -59,8 +59,29 @@ const getTutorAvailability = async (req: Request, res: Response) => {
   }
 };
 
+const getTutorSessionsController = async (req: Request, res: Response) => {
+  try {
+    const tutorId = req.user?.id;
+
+    const sessions = await tutorAvailabilityServices.getTutorSessionsService(
+      tutorId as string,
+    );
+
+    res.json({
+      success: true,
+      data: sessions,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 export const tutorAvailabilityController = {
   createAvailability,
   getTutorAvailability,
   getMyAvailability,
+  getTutorSessionsController,
 };

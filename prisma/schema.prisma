@@ -62,7 +62,7 @@ model Booking {
   studentId String
   student   User   @relation(fields: [studentId], references: [id])
 
-  status String @default("CONFIRMED") // later: CANCELLED
+  status String @default("CONFIRMED") 
 
   createdAt      DateTime     @default(now())
   tutorProfile   TutorProfile @relation(fields: [tutorProfileId], references: [id])
@@ -105,6 +105,7 @@ model User {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  isBanned  Boolean  @default(false)
 
   tutorProfile TutorProfile?
   bookings     Booking[]

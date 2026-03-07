@@ -2,7 +2,6 @@
 
 import { prisma } from "../../lib/prisma";
 
-
 export const createReviewService = async (
   bookingId: string,
   studentId: string,
@@ -42,4 +41,32 @@ export const createReviewService = async (
   });
 
   return review;
+};
+
+export const getTutorReviewsService = async (tutorId: string) => {
+  const tutor = await prisma.tutorProfile.findUnique({
+    where: {
+      userId: tutorId,
+    },
+  });
+  if (!tutor) throw new Error("Tutor not found");
+
+  const reviews = await prisma.review.findMany({
+    where: {
+      tutorProfileId: tutor.id,
+    },
+    include: {
+      student: {
+        select: {
+          name: true,
+          image: true,
+        },
+      },
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return reviews;
 };

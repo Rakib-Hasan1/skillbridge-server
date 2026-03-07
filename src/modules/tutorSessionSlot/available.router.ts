@@ -15,6 +15,11 @@ router.get(
   auth(UserRole.TUTOR),
   tutorAvailabilityController.getMyAvailability,
 );
+router.get(
+  "/sessions",
+  auth(UserRole.TUTOR),
+  tutorAvailabilityController.getTutorSessionsController,
+);
 
 router.get("/:tutorId", tutorAvailabilityController.getTutorAvailability);
 

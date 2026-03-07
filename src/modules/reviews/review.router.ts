@@ -1,11 +1,14 @@
 // routes/review.route.ts
 import express from "express";
 import auth, { UserRole } from "../../middlewares/auth";
-import { createReviewController } from "./review.controller";
+import {
+  createReviewController,
+  getTutorReviewsController,
+} from "./review.controller";
 
 const router = express.Router();
 
-// POST /api/reviews
 router.post("/", auth(UserRole.STUDENT), createReviewController);
+router.get("/", auth(UserRole.TUTOR), getTutorReviewsController);
 
 export const reviewsRouter = router;
