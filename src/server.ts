@@ -19,3 +19,6 @@ async function main() {
 }
 
 main();
+
+// Export the app for Vercel
+export default app;
