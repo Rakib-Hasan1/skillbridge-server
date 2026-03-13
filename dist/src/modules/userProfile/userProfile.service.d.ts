@@ -1,9 +1,4 @@
 export declare const userProfileService: {
-    getMyProfile: (userId: string) => Promise<{
-        id: string;
-        name: string;
-        email: string;
-        image: string | null;
-    } | null>;
+    getMyProfile: (userId: string) => Promise<any>;
 };
 //# sourceMappingURL=userProfile.service.d.ts.map

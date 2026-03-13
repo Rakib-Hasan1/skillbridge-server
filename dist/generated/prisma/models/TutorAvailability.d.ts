@@ -1180,6 +1180,11 @@ export type TutorAvailabilityFindManyArgs<ExtArgs extends runtime.Types.Extensio
      * Skip the first `n` TutorAvailabilities.
      */
     skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of TutorAvailabilities.
+     */
     distinct?: Prisma.TutorAvailabilityScalarFieldEnum | Prisma.TutorAvailabilityScalarFieldEnum[];
 };
 /**

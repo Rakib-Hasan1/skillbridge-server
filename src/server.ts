@@ -14,6 +14,13 @@ async function main() {
 
 main();
 
+// Start server locally
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
+});
+
+
 // Export only the app for Vercel
 export default app;
 
