@@ -23,7 +23,7 @@
 
     // Stricter Typechecking Options
     "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true,
+    // "exactOptionalPropertyTypes": true,
 
     // Style Options
     // "noImplicitReturns": true,
@@ -43,6 +43,6 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
   },
-  "include": ["src/**/*", "api"],
+  "include": ["src/**/*", "api","prisma.config.ts"],
   "exclude": ["node_modules", "dist", "generated/prisma"]
 }
